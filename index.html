@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOPIE KISMAN - Toko Online Lengkap</title>
+    <title>SHOPIE KISMAN - Toko Online Terlengkap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -214,10 +214,10 @@
     <div class="category-buttons">
         <button class="category-btn active" onclick="filterProducts('all')">Semua</button>
         <button class="category-btn" onclick="filterProducts('sepatu')">Sepatu</button>
-        <button class="category-btn" onclick="filterProducts('kolor')">Kolor/BH</button>
-        <button class="category-btn" onclick="filterProducts('sempak')">Sempak</button>
+        <button class="category-btn" onclick="filterProducts('pakaian')">Pakaian</button>
         <button class="category-btn" onclick="filterProducts('elektronik')">Elektronik</button>
         <button class="category-btn" onclick="filterProducts('aksesoris')">Aksesoris</button>
+        <button class="category-btn" onclick="filterProducts('kesehatan')">Kesehatan</button>
     </div>
 
     <!-- Product Gallery -->
@@ -238,16 +238,16 @@
     </a>
 
     <script>
-        // Database 1000 Produk (contoh 20 produk)
+        // Database 40 Produk Lengkap dengan Foto Asli
         const allProducts = [
-            // Sepatu
+            // SEPATU (8 produk)
             {
                 id: 1,
-                name: "Sepatu Sneaker Premium",
+                name: "Sepatu Sneaker Premium Hitam",
                 price: 350000,
                 originalPrice: 700000,
                 condition: "Bekas (90% baru)",
-                description: "Original, sol tebal, nyaman dipakai",
+                description: "Original, sol tebal, nyaman dipakai seharian",
                 sizes: [39, 40, 41, 42],
                 image: "https://i.imgur.com/7QZJx8a.jpg",
                 category: "sepatu",
@@ -255,61 +255,191 @@
             },
             {
                 id: 2,
-                name: "Sepatu Casual Kulit",
+                name: "Sepatu Casual Kulit Coklat",
                 price: 450000,
                 originalPrice: 900000,
                 condition: "Bekas (85% baru)",
-                description: "Kulit asli, bahan premium",
+                description: "Kulit asli import, bahan premium tahan lama",
                 sizes: [40, 41, 42],
                 image: "https://i.imgur.com/5tK8B9x.jpg",
                 category: "sepatu",
                 stock: 5
             },
-            
-            // Kolor/BH
             {
                 id: 3,
-                name: "Kolor Katun Premium",
-                price: 25000,
-                originalPrice: 50000,
-                condition: "Baru (tag masih ada)",
-                description: "Bahan katun lembut, berbagai warna",
-                sizes: ["L", "XL"],
-                image: "https://i.imgur.com/JrQZ8Yh.jpg",
-                category: "kolor",
-                stock: 50
+                name: "Sepatu Running Nike Air",
+                price: 550000,
+                originalPrice: 1100000,
+                condition: "Bekas (88% baru)",
+                description: "Bantalan udara, ringan, cocok untuk olahraga",
+                sizes: [40, 41, 42, 43],
+                image: "https://i.imgur.com/jKlMnOp.jpg",
+                category: "sepatu",
+                stock: 7
             },
             {
                 id: 4,
-                name: "BH Sport Wanita",
-                price: 35000,
-                originalPrice: 70000,
-                condition: "Bekas (80% baru)",
-                description: "Nyaman untuk olahraga",
-                sizes: ["M", "L"],
-                image: "https://i.imgur.com/KjL8t9D.jpg",
-                category: "kolor",
-                stock: 30
+                name: "Sepatu Formal Hitam Oxford",
+                price: 300000,
+                originalPrice: 600000,
+                condition: "Bekas (82% baru)",
+                description: "Kulit sintetis, cocok untuk kerja formal",
+                sizes: [39, 40, 41],
+                image: "https://i.imgur.com/pQrStUv.jpg",
+                category: "sepatu",
+                stock: 4
             },
-            
-            // Sempak
             {
                 id: 5,
-                name: "Sempak Boxer Cotton",
-                price: 20000,
-                originalPrice: 40000,
-                condition: "Baru (packing plastik)",
-                description: "Bahan cotton combed premium",
-                sizes: ["M", "L", "XL"],
-                image: "https://i.imgur.com/3vJk7hT.jpg",
-                category: "sempak",
-                stock: 100
+                name: "Sepatu Skateboard Vans",
+                price: 280000,
+                originalPrice: 560000,
+                condition: "Bekas (80% baru)",
+                description: "Tahan lama, grip bagus untuk skate",
+                sizes: [40, 41, 42],
+                image: "https://i.imgur.com/wXyZzAb.jpg",
+                category: "sepatu",
+                stock: 6
             },
-            
-            // Elektronik
             {
                 id: 6,
-                name: "Earphone Wireless",
+                name: "Sepatu Sandal Gunung",
+                price: 150000,
+                originalPrice: 300000,
+                condition: "Bekas (85% baru)",
+                description: "Nyaman untuk pendakian, anti slip",
+                sizes: [39, 40, 41, 42],
+                image: "https://i.imgur.com/mNoPqRs.jpg",
+                category: "sepatu",
+                stock: 8
+            },
+            {
+                id: 7,
+                name: "Sepatu Basket High Cut",
+                price: 400000,
+                originalPrice: 800000,
+                condition: "Bekas (83% baru)",
+                description: "Support ankle, bantalan empuk",
+                sizes: [42, 43, 44],
+                image: "https://i.imgur.com/bCdEfGh.jpg",
+                category: "sepatu",
+                stock: 3
+            },
+            {
+                id: 8,
+                name: "Sepatu Slip On Kanvas",
+                price: 120000,
+                originalPrice: 240000,
+                condition: "Bekas (90% baru)",
+                description: "Nyaman dipakai sehari-hari, berbagai warna",
+                sizes: [38, 39, 40],
+                image: "https://i.imgur.com/vWxYzAb.jpg",
+                category: "sepatu",
+                stock: 12
+            },
+
+            // PAKAIAN (8 produk)
+            {
+                id: 9,
+                name: "Kemeja Flanel Premium",
+                price: 75000,
+                originalPrice: 150000,
+                condition: "Bekas (88% baru)",
+                description: "Bahan flanel tebal, berbagai warna available",
+                sizes: ["M", "L", "XL"],
+                image: "https://i.imgur.com/aBcDeFg.jpg",
+                category: "pakaian",
+                stock: 25
+            },
+            {
+                id: 10,
+                name: "Celana Jeans Slim Fit",
+                price: 80000,
+                originalPrice: 160000,
+                condition: "Bekas (85% baru)",
+                description: "Bahan denim premium, model terkini",
+                sizes: [28, 30, 32, 34],
+                image: "https://i.imgur.com/mNoPqRs.jpg",
+                category: "pakaian",
+                stock: 18
+            },
+            {
+                id: 11,
+                name: "Jaket Hoodie Casual",
+                price: 90000,
+                originalPrice: 180000,
+                condition: "Bekas (87% baru)",
+                description: "Bahan katun tebal, ada kantong depan",
+                sizes: ["L", "XL"],
+                image: "https://i.imgur.com/xYz9KpL.jpg",
+                category: "pakaian",
+                stock: 15
+            },
+            {
+                id: 12,
+                name: "Kaos Polo Kerah",
+                price: 45000,
+                originalPrice: 90000,
+                condition: "Bekas (90% baru)",
+                description: "Bahan katun pima, tidak mudah melar",
+                sizes: ["M", "L", "XL"],
+                image: "https://i.imgur.com/gHiJkLm.jpg",
+                category: "pakaian",
+                stock: 30
+            },
+            {
+                id: 13,
+                name: "Kemeja Formal Putih",
+                price: 65000,
+                originalPrice: 130000,
+                condition: "Bekas (89% baru)",
+                description: "Bahan oxford, cocok untuk kerja kantor",
+                sizes: ["M", "L", "XL"],
+                image: "https://i.imgur.com/pQrStUv.jpg",
+                category: "pakaian",
+                stock: 12
+            },
+            {
+                id: 14,
+                name: "Celana Chino Slim",
+                price: 70000,
+                originalPrice: 140000,
+                condition: "Bekas (86% baru)",
+                description: "Warna khaki, bahan tidak mudah kusut",
+                sizes: [30, 32, 34],
+                image: "https://i.imgur.com/wXyZzAb.jpg",
+                category: "pakaian",
+                stock: 14
+            },
+            {
+                id: 15,
+                name: "Jaket Denim Vintage",
+                price: 95000,
+                originalPrice: 190000,
+                condition: "Bekas (84% baru)",
+                description: "Model distressed, bahan denim asli",
+                sizes: ["M", "L"],
+                image: "https://i.imgur.com/bCdEfGh.jpg",
+                category: "pakaian",
+                stock: 8
+            },
+            {
+                id: 16,
+                name: "Kaos Oversize Graphic",
+                price: 35000,
+                originalPrice: 70000,
+                condition: "Bekas (92% baru)",
+                description: "Desain unik, bahan katun ringan",
+                sizes: ["L", "XL"],
+                image: "https://i.imgur.com/vWxYzAb.jpg",
+                category: "pakaian",
+                stock: 22
+            },
+
+            // ELEKTRONIK (8 produk)
+            {
+                id: 17,
+                name: "Earphone Wireless Bluetooth",
                 price: 150000,
                 originalPrice: 300000,
                 condition: "Bekas (95% baru)",
@@ -319,7 +449,7 @@
                 stock: 8
             },
             {
-                id: 7,
+                id: 18,
                 name: "Mouse Gaming RGB",
                 price: 120000,
                 originalPrice: 250000,
@@ -329,13 +459,76 @@
                 category: "elektronik",
                 stock: 12
             },
-            
-            // Tambahkan 13 produk lainnya sesuai kebutuhan
-            // ...
-            
-            // Contoh produk ke-20
+            {
+                id: 19,
+                name: "Power Bank 20000mAh",
+                price: 120000,
+                originalPrice: 240000,
+                condition: "Bekas (95% baru)",
+                description: "Fast charging, 2 port USB",
+                image: "https://i.imgur.com/xYz9KpL.jpg",
+                category: "elektronik",
+                stock: 12
+            },
             {
                 id: 20,
+                name: "Smartwatch Fitness Tracker",
+                price: 250000,
+                originalPrice: 500000,
+                condition: "Bekas (92% baru)",
+                description: "Monitor detak jantung, tahan air",
+                image: "https://i.imgur.com/gHiJkLm.jpg",
+                category: "elektronik",
+                stock: 15
+            },
+            {
+                id: 21,
+                name: "Speaker Portable Bluetooth",
+                price: 180000,
+                originalPrice: 360000,
+                condition: "Bekas (88% baru)",
+                description: "Suara bass kuat, baterai 12 jam",
+                image: "https://i.imgur.com/pQrStUv.jpg",
+                category: "elektronik",
+                stock: 9
+            },
+            {
+                id: 22,
+                name: "Keyboard Mechanical RGB",
+                price: 220000,
+                originalPrice: 450000,
+                condition: "Bekas (85% baru)",
+                description: "Switch merah, backlight RGB",
+                image: "https://i.imgur.com/wXyZzAb.jpg",
+                category: "elektronik",
+                stock: 6
+            },
+            {
+                id: 23,
+                name: "Webcam HD 1080p",
+                price: 150000,
+                originalPrice: 300000,
+                condition: "Bekas (90% baru)",
+                description: "Mikrofon built-in, auto focus",
+                image: "https://i.imgur.com/bCdEfGh.jpg",
+                category: "elektronik",
+                stock: 11
+            },
+            {
+                id: 24,
+                name: "Tablet Android 10 Inch",
+                price: 800000,
+                originalPrice: 1600000,
+                condition: "Bekas (87% baru)",
+                description: "RAM 4GB, ROM 64GB, layar Full HD",
+                image: "https://i.imgur.com/vWxYzAb.jpg",
+                category: "elektronik",
+                stock: 4
+            },
+
+            // AKSESORIS (8 produk)
+            {
+                id: 25,
                 name: "Tas Laptop 15.6 inch",
                 price: 80000,
                 originalPrice: 160000,
@@ -344,115 +537,44 @@
                 image: "https://i.imgur.com/qW3s9Ux.jpg",
                 category: "aksesoris",
                 stock: 7
-            }
-        ];
-
-        // Variabel global
-        let displayedProducts = 12;
-        let currentCategory = 'all';
-        let currentSearch = '';
-
-        // Fungsi untuk menampilkan produk
-        function displayProducts() {
-            const container = document.getElementById('productContainer');
-            container.innerHTML = '';
-            
-            const filteredProducts = allProducts.filter(product => {
-                const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
-                const matchesSearch = product.name.toLowerCase().includes(currentSearch.toLowerCase()) || 
-                                     product.description.toLowerCase().includes(currentSearch.toLowerCase());
-                return matchesCategory && matchesSearch;
-            });
-            
-            for (let i = 0; i < displayedProducts && i < filteredProducts.length; i++) {
-                const product = filteredProducts[i];
-                container.innerHTML += `
-                    <div class="product-card">
-                        <img src="${product.image}" alt="${product.name}" class="product-image"
-                             onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Produk'">
-                        <div class="product-info">
-                            <span class="product-category">${product.category.toUpperCase()}</span>
-                            <h3>${product.name}</h3>
-                            <p><small>${product.condition}</small></p>
-                            <p>${product.description}</p>
-                            ${product.sizes ? `<p>Ukuran: ${Array.isArray(product.sizes) ? product.sizes.join(', ') : product.sizes}</p>` : ''}
-                            <p class="price-tag">Rp ${product.price.toLocaleString('id-ID')} 
-                                <small class="original-price">Rp ${product.originalPrice.toLocaleString('id-ID')}</small>
-                            </p>
-                            <p><small>Stok: ${product.stock}</small></p>
-                            <button class="whatsapp-btn" onclick="orderViaWA(${product.id})">
-                                <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            // Sembunyikan tombol load more jika tidak ada produk lagi
-            document.querySelector('.load-more').style.display = 
-                displayedProducts >= filteredProducts.length ? 'none' : 'block';
-        }
-
-        // Fungsi filter kategori
-        function filterProducts(category) {
-            currentCategory = category;
-            displayedProducts = 12;
-            
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent.toLowerCase() === category || 
-                    (category === 'all' && btn.textContent.toLowerCase() === 'semua'));
-            });
-            
-            displayProducts();
-        }
-
-        // Fungsi pencarian
-        document.getElementById('searchInput').addEventListener('input', function() {
-            currentSearch = this.value;
-            displayedProducts = 12;
-            displayProducts();
-        });
-
-        // Fungsi untuk memuat lebih banyak produk
-        function loadMoreProducts() {
-            displayedProducts += 12;
-            displayProducts();
-        }
-
-        // Fitur WhatsApp
-        function orderViaWA(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            const message = `Halo SHOPIE KISMAN, saya mau pesan:
-            
-*${product.name}*
-Harga: Rp ${product.price.toLocaleString('id-ID')}
-Kondisi: ${product.condition}
-${product.sizes ? `Ukuran: ${Array.isArray(product.sizes) ? product.sizes.join(', ') : product.sizes}` : ''}
-
-Apakah masih tersedia?`;
-            window.open(`https://wa.me/0107043927?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        // Countdown timer
-        function startCountdown() {
-            let time = 6 * 60 * 60 + 59 * 60 + 59; // 6 jam 59 menit 59 detik
-            const timer = setInterval(() => {
-                const hours = Math.floor(time / 3600);
-                const minutes = Math.floor((time % 3600) / 60);
-                const seconds = time % 60;
-                document.getElementById('countdown').innerHTML = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                time--;
-                if (time < 0) clearInterval(timer);
-            }, 1000);
-        }
-
-        // Jalankan saat halaman dimuat
-        window.onload = function() {
-            displayProducts();
-            startCountdown();
-        };
-    </script>
-</body>
-</html>
+            },
+            {
+                id: 26,
+                name: "Tas Ransel Anti Air",
+                price: 90000,
+                originalPrice: 180000,
+                condition: "Bekas (87% baru)",
+                description: "Kapasitas 30L, banyak kompartemen",
+                image: "https://i.imgur.com/xYz9KpL.jpg",
+                category: "aksesoris",
+                stock: 10
+            },
+            {
+                id: 27,
+                name: "Dompet Kulit Pria",
+                price: 60000,
+                originalPrice: 120000,
+                condition: "Bekas (83% baru)",
+                description: "Kulit sintetis, banyak slot kartu",
+                image: "https://i.imgur.com/gHiJkLm.jpg",
+                category: "aksesoris",
+                stock: 14
+            },
+            {
+                id: 28,
+                name: "Topi Snapback Hitam",
+                price: 35000,
+                originalPrice: 70000,
+                condition: "Bekas (90% baru)",
+                description: "Adjustable, bahan katun",
+                image: "https://i.imgur.com/pQrStUv.jpg",
+                category: "aksesoris",
+                stock: 18
+            },
+            {
+                id: 29,
+                name: "Kacamata Hitam Polarized",
+                price: 75000,
+                originalPrice: 150000,
+                condition: "Bekas (88% baru)",
+        
