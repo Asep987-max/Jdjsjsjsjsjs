@@ -115,37 +115,7 @@
     </style>
 </head>
 <body>
- <div class="product-gallery">
-  <!-- Produk 1 -->
-  <div class="product-card">
-    <img src="https://drive.google.com/uc?export=view&id=1rEaJKT2TfXaXKZdyppZKgVOr2v6vixLI" 
-         alt="Sepatu Kisman Limited Edition" 
-         class="product-image">
-    <div class="product-info">
-      <h3>Sepatu Kisman Edisi Spesial</h3>
-      <p>Kondisi: Bekas (90% baru)</p>
-      <p class="price">Rp 1.250.000</p>
-      <button class="whatsapp-btn" onclick="orderViaWA(1)">
-        <i class="fab fa-whatsapp"></i> Pesan via WA
-      </button>
-    </div>
-  </div>
-
-  <!-- Produk 2 -->
-  <div class="product-card">
-    <img src="https://drive.google.com/uc?export=view&id=1rQAPe8CahIdH9FnlZhuF7pQXwoQn4TW4" 
-         alt="Sepatu Kisman Premium" 
-         class="product-image">
-    <div class="product-info">
-      <h3>Sepatu Kisman Premium</h3>
-      <p>Kondisi: Bekas (85% baru)</p>
-      <p class="price">Rp 950.000</p>
-      <button class="whatsapp-btn" onclick="orderViaWA(2)">
-        <i class="fab fa-whatsapp"></i> Pesan via WA
-      </button>
-    </div>
-  </div>
- </div>   <!-- Header -->
+    <!-- Header -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
@@ -179,38 +149,26 @@
         const products = [
             {
                 id: 1,
-                name: "Nike Air Jordan 1 Retro",
-                price: 1200000,
+                name: "Sepatu Kisman Edisi Spesial",
+                price: 1250000,
                 originalPrice: 2500000,
                 condition: "Bekas (90% baru)",
                 description: "Original, box lengkap, sol masih tebal",
                 sizes: [40, 41, 42],
-                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                image: "https://drive.google.com/uc?export=view&id=1rEaJKT2TfXaXKZdyppZKgVOr2v6vixLI",
                 category: "premium"
             },
             {
                 id: 2,
-                name: "Adidas Yeezy Boost 350 V2",
-                price: 1500000,
-                originalPrice: 3000000,
+                name: "Sepatu Kisman Premium",
+                price: 950000,
+                originalPrice: 1800000,
                 condition: "Bekas (85% baru)",
                 description: "Warna masih fresh, bahan primeknit",
                 sizes: [39, 40, 42],
-                image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                image: "https://drive.google.com/uc?export=view&id=1rQAPe8CahIdH9FnlZhuF7pQXwoQn4TW4",
                 category: "premium"
-            },
-            {
-                id: 3,
-                name: "New Balance 550 White",
-                price: 850000,
-                originalPrice: 1800000,
-                condition: "Bekas (80% baru)",
-                description: "Import US, kulit asli",
-                sizes: [38, 39, 40],
-                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
-                category: "import"
             }
-            // Tambahkan produk lain di sini
         ];
 
         // Render Produk
