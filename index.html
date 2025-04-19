@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOPIE KISMAN - Toko Online Terlengkap</title>
+    <title>SHOPIE KISMAN - Toko Online Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
             --primary: #e63946;
@@ -12,569 +13,675 @@
             --dark: #1d3557;
             --light: #f1faee;
             --success: #2a9d8f;
+            --accent: #ff9f1c;
         }
-        * {
+        
+        /* Background Animasi */
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
-        }
-        body {
-            background-color: var(--light);
+            background: linear-gradient(-45deg, #f1faee, #a8dadc, #457b9d, #1d3557);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             color: var(--dark);
         }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), #ff4757);
+            background: rgba(30, 53, 87, 0.9);
+            backdrop-filter: blur(10px);
             color: white;
             padding: 1rem;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            transition: all 0.3s;
         }
+        
+        header.scrolled {
+            padding: 0.5rem 1rem;
+            background: rgba(30, 53, 87, 0.95);
+        }
+        
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
         }
+        
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 0.5rem;
             color: white;
             text-decoration: none;
-        }
-        .search-bar {
-            padding: 0.5rem;
-            border-radius: 20px;
-            border: none;
-            width: 300px;
-            margin: 0 1rem;
-        }
-        .category-buttons {
-            display: flex;
-            gap: 0.5rem;
-            padding: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            background: white;
-            position: sticky;
-            top: 68px;
-            z-index: 99;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .category-btn {
-            background: var(--light);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .category-btn:hover, .category-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-        .product-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .product-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: transform 0.3s;
         }
-        .product-card:hover {
-            transform: translateY(-5px);
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
+        
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            width: 400px;
+            margin: 0 1rem;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 2px 20px rgba(230, 57, 70, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+        }
+        
+        /* Flash Sale */
+        .flash-sale {
+            background: linear-gradient(90deg, #ff4757, #ff9f1c);
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            font-weight: bold;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .flash-sale::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            100% { left: 100%; }
+        }
+        
+        /* Kategori */
+        .category-buttons {
+            display: flex;
+            gap: 0.8rem;
+            padding: 1.2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: rgba(255,255,255,0.9);
+            position: sticky;
+            top: 78px;
+            z-index: 999;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .category-btn {
+            background: white;
+            border: 2px solid var(--light);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* Produk */
+        .product-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .product-image-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
         .product-image {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            border-bottom: 1px solid #eee;
+            transition: transform 0.5s;
         }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
         .product-info {
-            padding: 1rem;
+            padding: 1.5rem;
+            position: relative;
         }
+        
         .product-category {
             background: var(--secondary);
             color: white;
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
             font-size: 0.7rem;
             display: inline-block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
         }
+        
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .product-condition {
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .product-desc {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .product-sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .size-option {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .size-option:hover, .size-option.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .price-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
         .price-tag {
             color: var(--primary);
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
+            font-weight: 800;
+            font-size: 1.3rem;
         }
+        
         .original-price {
             text-decoration: line-through;
-            color: gray;
+            color: #999;
             font-size: 0.9rem;
         }
+        
+        .discount-badge {
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .stock-info {
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .stock-info .in-stock {
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.8rem;
+        }
+        
         .whatsapp-btn {
             background: #25D366;
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            width: 100%;
-            margin-top: 0.5rem;
-            transition: background 0.3s;
+            flex: 1;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
         }
+        
         .whatsapp-btn:hover {
             background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
-        .flash-sale {
-            background: #ffcc00;
-            padding: 0.5rem;
+        
+        .cart-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(230, 57, 70, 0.3);
+        }
+        
+        .cart-btn:hover {
+            background: #c1121f;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        /* Tombol Load More */
+        .load-more-container {
             text-align: center;
-            font-weight: bold;
-            margin: 1rem 0;
+            margin: 3rem 0;
         }
+        
         .load-more {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
             cursor: pointer;
-            display: block;
-            margin: 2rem auto;
-            font-weight: bold;
-            transition: transform 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
+        
         .load-more:hover {
-            transform: scale(1.05);
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
         }
-        @media (max-width: 768px) {
+        
+        /* Floating Button */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        
+        .whatsapp-float {
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+        }
+        
+        .cart-float {
+            background: var(--primary);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .cart-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.6);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--accent);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        /* Animasi */
+        .animate-pop {
+            animation: popIn 0.5s ease-out;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(30, 53, 87, 0.9);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ddd;
+            line-height: 1.8;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsif */
+        @media (max-width: 992px) {
+            .search-container {
+                width: 300px;
+            }
+            
             .product-gallery {
-                grid-template-columns: 1fr 1fr;
-                padding: 1rem;
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
                 gap: 1rem;
             }
-            .search-bar {
+            
+            .search-container {
                 width: 100%;
-                margin: 0.5rem 0;
+                margin: 1rem 0;
+            }
+            
+            .category-buttons {
+                top: 140px;
+            }
+            
+            .product-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                padding: 1rem;
+                gap: 1.5rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
             }
         }
-        @media (max-width: 480px) {
+        
+        @media (max-width: 576px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .category-buttons {
+                top: 150px;
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding: 1rem;
+                white-space: nowrap;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+            }
+            
             .product-gallery {
                 grid-template-columns: 1fr;
             }
-            .logo {
-                font-size: 1.2rem;
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-buttons {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-float, .cart-float {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="mainHeader">
         <div class="nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-store"></i> SHOPIE KISMAN
             </a>
-            <input type="text" class="search-bar" placeholder="Cari produk..." id="searchInput">
-            <div style="display: flex; gap: 1rem;">
-                <button onclick="toggleCart()" style="background: none; border: none; color: white; cursor: pointer;">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span id="cartCount">0</span>
-                </button>
+            
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="Cari produk...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            
+            <div style="display: flex; gap: 1.5rem; align-items: center;">
+                <div style="position: relative;">
+                    <i class="fas fa-user" style="font-size: 1.3rem; color: white; cursor: pointer;"></i>
+                </div>
+                <div style="position: relative; cursor: pointer;">
+                    <i class="fas fa-heart" style="font-size: 1.3rem; color: white;"></i>
+                    <span style="position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">3</span>
+                </div>
+                <div style="position: relative; cursor: pointer;" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart" style="font-size: 1.3rem; color: white;"></i>
+                    <span id="cartCount" style="position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem;">0</span>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Flash Sale Banner -->
-    <div class="flash-sale">
+    <div class="flash-sale animate__animated animate__fadeIn">
         ⚡ FLASH SALE! Diskon hingga 70% - Berakhir dalam: <span id="countdown">06:59:59</span>
     </div>
 
     <!-- Category Buttons -->
     <div class="category-buttons">
-        <button class="category-btn active" onclick="filterProducts('all')">Semua</button>
-        <button class="category-btn" onclick="filterProducts('sepatu')">Sepatu</button>
-        <button class="category-btn" onclick="filterProducts('pakaian')">Pakaian</button>
-        <button class="category-btn" onclick="filterProducts('elektronik')">Elektronik</button>
-        <button class="category-btn" onclick="filterProducts('aksesoris')">Aksesoris</button>
-        <button class="category-btn" onclick="filterProducts('kesehatan')">Kesehatan</button>
-    </div>
-
-    <!-- Product Gallery -->
-    <div class="product-gallery" id="productContainer">
-        <!-- Produk akan dimuat via JavaScript -->
-    </div>
-
-    <button class="load-more" onclick="loadMoreProducts()">
-        <i class="fas fa-plus"></i> Muat Lebih Banyak
-    </button>
-
-    <!-- WhatsApp Float Button -->
-    <a href="https://wa.me/0107043927?text=Halo%20Shopie%20Kisman,%20saya%20mau%20tanya%20produk" 
-       style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 1rem; border-radius: 50%; z-index: 100; font-size: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: transform 0.3s;"
-       onmouseover="this.style.transform='scale(1.1)'" 
-       onmouseout="this.style.transform='scale(1)'">
-       <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <script>
-        // Database 40 Produk Lengkap dengan Foto Asli
-        const allProducts = [
-            // SEPATU (8 produk)
-            {
-                id: 1,
-                name: "Sepatu Sneaker Premium Hitam",
-                price: 350000,
-                originalPrice: 700000,
-                condition: "Bekas (90% baru)",
-                description: "Original, sol tebal, nyaman dipakai seharian",
-                sizes: [39, 40, 41, 42],
-                image: "https://i.imgur.com/7QZJx8a.jpg",
-                category: "sepatu",
-                stock: 10
-            },
-            {
-                id: 2,
-                name: "Sepatu Casual Kulit Coklat",
-                price: 450000,
-                originalPrice: 900000,
-                condition: "Bekas (85% baru)",
-                description: "Kulit asli import, bahan premium tahan lama",
-                sizes: [40, 41, 42],
-                image: "https://i.imgur.com/5tK8B9x.jpg",
-                category: "sepatu",
-                stock: 5
-            },
-            {
-                id: 3,
-                name: "Sepatu Running Nike Air",
-                price: 550000,
-                originalPrice: 1100000,
-                condition: "Bekas (88% baru)",
-                description: "Bantalan udara, ringan, cocok untuk olahraga",
-                sizes: [40, 41, 42, 43],
-                image: "https://i.imgur.com/jKlMnOp.jpg",
-                category: "sepatu",
-                stock: 7
-            },
-            {
-                id: 4,
-                name: "Sepatu Formal Hitam Oxford",
-                price: 300000,
-                originalPrice: 600000,
-                condition: "Bekas (82% baru)",
-                description: "Kulit sintetis, cocok untuk kerja formal",
-                sizes: [39, 40, 41],
-                image: "https://i.imgur.com/pQrStUv.jpg",
-                category: "sepatu",
-                stock: 4
-            },
-            {
-                id: 5,
-                name: "Sepatu Skateboard Vans",
-                price: 280000,
-                originalPrice: 560000,
-                condition: "Bekas (80% baru)",
-                description: "Tahan lama, grip bagus untuk skate",
-                sizes: [40, 41, 42],
-                image: "https://i.imgur.com/wXyZzAb.jpg",
-                category: "sepatu",
-                stock: 6
-            },
-            {
-                id: 6,
-                name: "Sepatu Sandal Gunung",
-                price: 150000,
-                originalPrice: 300000,
-                condition: "Bekas (85% baru)",
-                description: "Nyaman untuk pendakian, anti slip",
-                sizes: [39, 40, 41, 42],
-                image: "https://i.imgur.com/mNoPqRs.jpg",
-                category: "sepatu",
-                stock: 8
-            },
-            {
-                id: 7,
-                name: "Sepatu Basket High Cut",
-                price: 400000,
-                originalPrice: 800000,
-                condition: "Bekas (83% baru)",
-                description: "Support ankle, bantalan empuk",
-                sizes: [42, 43, 44],
-                image: "https://i.imgur.com/bCdEfGh.jpg",
-                category: "sepatu",
-                stock: 3
-            },
-            {
-                id: 8,
-                name: "Sepatu Slip On Kanvas",
-                price: 120000,
-                originalPrice: 240000,
-                condition: "Bekas (90% baru)",
-                description: "Nyaman dipakai sehari-hari, berbagai warna",
-                sizes: [38, 39, 40],
-                image: "https://i.imgur.com/vWxYzAb.jpg",
-                category: "sepatu",
-                stock: 12
-            },
-
-            // PAKAIAN (8 produk)
-            {
-                id: 9,
-                name: "Kemeja Flanel Premium",
-                price: 75000,
-                originalPrice: 150000,
-                condition: "Bekas (88% baru)",
-                description: "Bahan flanel tebal, berbagai warna available",
-                sizes: ["M", "L", "XL"],
-                image: "https://i.imgur.com/aBcDeFg.jpg",
-                category: "pakaian",
-                stock: 25
-            },
-            {
-                id: 10,
-                name: "Celana Jeans Slim Fit",
-                price: 80000,
-                originalPrice: 160000,
-                condition: "Bekas (85% baru)",
-                description: "Bahan denim premium, model terkini",
-                sizes: [28, 30, 32, 34],
-                image: "https://i.imgur.com/mNoPqRs.jpg",
-                category: "pakaian",
-                stock: 18
-            },
-            {
-                id: 11,
-                name: "Jaket Hoodie Casual",
-                price: 90000,
-                originalPrice: 180000,
-                condition: "Bekas (87% baru)",
-                description: "Bahan katun tebal, ada kantong depan",
-                sizes: ["L", "XL"],
-                image: "https://i.imgur.com/xYz9KpL.jpg",
-                category: "pakaian",
-                stock: 15
-            },
-            {
-                id: 12,
-                name: "Kaos Polo Kerah",
-                price: 45000,
-                originalPrice: 90000,
-                condition: "Bekas (90% baru)",
-                description: "Bahan katun pima, tidak mudah melar",
-                sizes: ["M", "L", "XL"],
-                image: "https://i.imgur.com/gHiJkLm.jpg",
-                category: "pakaian",
-                stock: 30
-            },
-            {
-                id: 13,
-                name: "Kemeja Formal Putih",
-                price: 65000,
-                originalPrice: 130000,
-                condition: "Bekas (89% baru)",
-                description: "Bahan oxford, cocok untuk kerja kantor",
-                sizes: ["M", "L", "XL"],
-                image: "https://i.imgur.com/pQrStUv.jpg",
-                category: "pakaian",
-                stock: 12
-            },
-            {
-                id: 14,
-                name: "Celana Chino Slim",
-                price: 70000,
-                originalPrice: 140000,
-                condition: "Bekas (86% baru)",
-                description: "Warna khaki, bahan tidak mudah kusut",
-                sizes: [30, 32, 34],
-                image: "https://i.imgur.com/wXyZzAb.jpg",
-                category: "pakaian",
-                stock: 14
-            },
-            {
-                id: 15,
-                name: "Jaket Denim Vintage",
-                price: 95000,
-                originalPrice: 190000,
-                condition: "Bekas (84% baru)",
-                description: "Model distressed, bahan denim asli",
-                sizes: ["M", "L"],
-                image: "https://i.imgur.com/bCdEfGh.jpg",
-                category: "pakaian",
-                stock: 8
-            },
-            {
-                id: 16,
-                name: "Kaos Oversize Graphic",
-                price: 35000,
-                originalPrice: 70000,
-                condition: "Bekas (92% baru)",
-                description: "Desain unik, bahan katun ringan",
-                sizes: ["L", "XL"],
-                image: "https://i.imgur.com/vWxYzAb.jpg",
-                category: "pakaian",
-                stock: 22
-            },
-
-            // ELEKTRONIK (8 produk)
-            {
-                id: 17,
-                name: "Earphone Wireless Bluetooth",
-                price: 150000,
-                originalPrice: 300000,
-                condition: "Bekas (95% baru)",
-                description: "Baterai tahan lama, suara jernih",
-                image: "https://i.imgur.com/8mN9s0z.jpg",
-                category: "elektronik",
-                stock: 8
-            },
-            {
-                id: 18,
-                name: "Mouse Gaming RGB",
-                price: 120000,
-                originalPrice: 250000,
-                condition: "Bekas (90% baru)",
-                description: "DPI tinggi, 6 tombol programmable",
-                image: "https://i.imgur.com/v7Wk2pY.jpg",
-                category: "elektronik",
-                stock: 12
-            },
-            {
-                id: 19,
-                name: "Power Bank 20000mAh",
-                price: 120000,
-                originalPrice: 240000,
-                condition: "Bekas (95% baru)",
-                description: "Fast charging, 2 port USB",
-                image: "https://i.imgur.com/xYz9KpL.jpg",
-                category: "elektronik",
-                stock: 12
-            },
-            {
-                id: 20,
-                name: "Smartwatch Fitness Tracker",
-                price: 250000,
-                originalPrice: 500000,
-                condition: "Bekas (92% baru)",
-                description: "Monitor detak jantung, tahan air",
-                image: "https://i.imgur.com/gHiJkLm.jpg",
-                category: "elektronik",
-                stock: 15
-            },
-            {
-                id: 21,
-                name: "Speaker Portable Bluetooth",
-                price: 180000,
-                originalPrice: 360000,
-                condition: "Bekas (88% baru)",
-                description: "Suara bass kuat, baterai 12 jam",
-                image: "https://i.imgur.com/pQrStUv.jpg",
-                category: "elektronik",
-                stock: 9
-            },
-            {
-                id: 22,
-                name: "Keyboard Mechanical RGB",
-                price: 220000,
-                originalPrice: 450000,
-                condition: "Bekas (85% baru)",
-                description: "Switch merah, backlight RGB",
-                image: "https://i.imgur.com/wXyZzAb.jpg",
-                category: "elektronik",
-                stock: 6
-            },
-            {
-                id: 23,
-                name: "Webcam HD 1080p",
-                price: 150000,
-                originalPrice: 300000,
-                condition: "Bekas (90% baru)",
-                description: "Mikrofon built-in, auto focus",
-                image: "https://i.imgur.com/bCdEfGh.jpg",
-                category: "elektronik",
-                stock: 11
-            },
-            {
-                id: 24,
-                name: "Tablet Android 10 Inch",
-                price: 800000,
-                originalPrice: 1600000,
-                condition: "Bekas (87% baru)",
-                description: "RAM 4GB, ROM 64GB, layar Full HD",
-                image: "https://i.imgur.com/vWxYzAb.jpg",
-                category: "elektronik",
-                stock: 4
-            },
-
-            // AKSESORIS (8 produk)
-            {
-                id: 25,
-                name: "Tas Laptop 15.6 inch",
-                price: 80000,
-                originalPrice: 160000,
-                condition: "Bekas (85% baru)",
-                description: "Bahan waterproof, banyak kompartemen",
-                image: "https://i.imgur.com/qW3s9Ux.jpg",
-                category: "aksesoris",
-                stock: 7
-            },
-            {
-                id: 26,
-                name: "Tas Ransel Anti Air",
-                price: 90000,
-                originalPrice: 180000,
-                condition: "Bekas (87% baru)",
-                description: "Kapasitas 30L, banyak kompartemen",
-                image: "https://i.imgur.com/xYz9KpL.jpg",
-                category: "aksesoris",
-                stock: 10
-            },
-            {
-                id: 27,
-                name: "Dompet Kulit Pria",
-                price: 60000,
-                originalPrice: 120000,
-                condition: "Bekas (83% baru)",
-                description: "Kulit sintetis, banyak slot kartu",
-                image: "https://i.imgur.com/gHiJkLm.jpg",
-                category: "aksesoris",
-                stock: 14
-            },
-            {
-                id: 28,
-                name: "Topi Snapback Hitam",
-                price: 35000,
-                originalPrice: 70000,
-                condition: "Bekas (90% baru)",
-                description: "Adjustable, bahan katun",
-                image: "https://i.imgur.com/pQrStUv.jpg",
-                category: "aksesoris",
-                stock: 18
-            },
-            {
-                id: 29,
-                name: "Kacamata Hitam Polarized",
-                price: 75000,
-                originalPrice: 150000,
-                condition: "Bekas (88% baru)",
-        
+        <button class="category-btn active" onclick="filterProducts('all')">Semua Produk</button>
+        <button class="category-btn" onclick="filterProducts('sepatu')"><i class="fas fa-shoe-prints"></i> Sepatu</button>
+        <button class="category-btn" onclick="filterProducts('pakaian')"><i class="fas fa-tshirt"></i> Pakaian</button>
+        <button class="category-btn" onclick="filterProducts('elektronik')"><i class="fas fa-laptop"></i> Elektronik</button>
+        <button class="category-btn" onclick="filterProducts('aksesoris')"><i class="fas fa-watch"></i> Aksesoris</button>
