@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOPIE KISMAN - Marketplace Sepatu Bekas Premium</title>
+    <title>SHOPIE KISMAN - Sepatu Bekas Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/360-viewer@1.0.0/dist/image-360-viewer.min.css" rel="stylesheet">
     <style>
         :root {
             --primary: #e63946;
@@ -13,21 +12,17 @@
             --dark: #1d3557;
             --light: #f1faee;
             --success: #2a9d8f;
-            --warning: #e9c46a;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
-
         body {
             background-color: var(--light);
             color: var(--dark);
         }
-
         header {
             background: linear-gradient(135deg, var(--primary), #ff4757);
             color: white;
@@ -37,7 +32,6 @@
             top: 0;
             z-index: 100;
         }
-
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -45,217 +39,198 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            text-decoration: none;
-            color: white;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: white;
+            text-decoration: none;
         }
-
-        .categories {
-            padding: 1rem;
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 60px;
-            z-index: 90;
-        }
-
-        .category-filter {
-            display: flex;
-            gap: 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            overflow-x: auto;
-        }
-
-        .products {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+        .product-gallery {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
-
         .product-card {
             background: white;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            position: relative;
+            transition: transform 0.3s;
         }
-
         .product-card:hover {
             transform: translateY(-5px);
         }
-
         .product-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
-            border-bottom: 2px solid var(--light);
         }
-
         .product-info {
             padding: 1rem;
         }
-
-        .discount-badge {
-            background: var(--success);
+        .price-tag {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+        .original-price {
+            text-decoration: line-through;
+            color: gray;
+            font-size: 0.9rem;
+        }
+        .whatsapp-btn {
+            background: #25D366;
             color: white;
-            padding: 0.2rem 0.5rem;
+            border: none;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
-            font-size: 0.8rem;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-        }
-
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -350px;
-            width: 350px;
-            height: 100%;
-            background: white;
-            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            padding: 1rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Fitur Baru */
-        .live-chat {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            padding: 1rem;
-            border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            margin-top: 0.5rem;
         }
-
         .flash-sale {
-            background: var(--warning);
+            background: #ffcc00;
             padding: 0.5rem;
             text-align: center;
             font-weight: bold;
+            margin: 1rem 0;
         }
-
-        .product-comparison {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin: 2rem 0;
-        }
-
-        .affiliate-section {
-            background: var(--light);
-            padding: 2rem;
-            text-align: center;
-            margin: 2rem 0;
+        @media (max-width: 768px) {
+            .product-gallery {
+                grid-template-columns: 1fr 1fr;
+                padding: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Flash Sale Banner -->
-    <div class="flash-sale">
-        ⚡ FLASH SALE! Diskon hingga 70% - Berakhir dalam 03:59:59
-    </div>
-
+    <!-- Header -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-shoe-prints"></i> SHOPIE KISMAN
             </a>
-            <div class="nav-items">
-                <input type="text" class="search-bar" placeholder="Cari merek (Nike, Adidas, dll)...">
-                <div class="user-actions">
-                    <button class="cart-button" onclick="toggleCartModal()">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cartCount">0</span>
-                    </button>
-                </div>
+            <div style="display: flex; gap: 1rem;">
+                <button onclick="toggleCart()" style="background: none; border: none; color: white; cursor: pointer;">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount">0</span>
+                </button>
             </div>
         </div>
     </header>
 
-    <div class="categories">
-        <div class="category-filter">
-            <button class="category-btn active" onclick="filterProducts('all')">Semua</button>
-            <button class="category-btn" onclick="filterProducts('premium')">Premium</button>
-            <button class="category-btn" onclick="filterProducts('sport')">Olahraga</button>
-            <button class="category-btn" onclick="filterProducts('vintage')">Vintage</button>
-        </div>
+    <!-- Flash Sale Banner -->
+    <div class="flash-sale">
+        ⚡ FLASH SALE! Diskon hingga 50% - Berakhir dalam: <span id="countdown">03:59:59</span>
     </div>
 
-    <!-- Fitur Baru: Affiliate Program -->
-    <div class="affiliate-section">
-        <h2>✌️ Jadi Affiliate Kami!</h2>
-        <p>Dapatkan komisi 15% dari setiap penjualan</p>
-        <button onclick="showAffiliateProgram()">Daftar Sekarang</button>
-    </div>
+    <!-- Product Gallery -->
+    <div class="product-gallery" id="products"></div>
 
-    <div class="products" id="products"></div>
-
-    <!-- Fitur Baru: Live Chat -->
-    <div class="live-chat" onclick="openLiveChat()">
-        <i class="fas fa-comments"></i>
-    </div>
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Shopie%20Kisman,%20saya%20mau%20tanya%20produk" 
+       style="position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 1rem; border-radius: 50%; z-index: 100; font-size: 1.5rem;">
+       <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Database Produk
-        const products = [...]; // Isi dengan 24 produk sesuai kategori
-
-        // Fitur Baru
-        function showAffiliateProgram() {
-            alert("Kirim email ke affiliate@shopie.com dengan subjek 'Daftar Affiliate'");
-        }
-
-        function openLiveChat() {
-            const message = "Halo, saya butuh bantuan dengan produk...";
-            window.open(`https://tawk.to/chat`, '_blank');
-        }
-
-        // Sistem Kupon
-        function applyCoupon() {
-            const coupon = document.getElementById('couponInput').value;
-            if(coupon === 'DISKON10') {
-                alert('Diskon 10% berhasil diterapkan!');
+        const products = [
+            {
+                id: 1,
+                name: "Nike Air Jordan 1 Retro",
+                price: 1200000,
+                originalPrice: 2500000,
+                condition: "Bekas (90% baru)",
+                description: "Original, box lengkap, sol masih tebal",
+                sizes: [40, 41, 42],
+                image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "premium"
+            },
+            {
+                id: 2,
+                name: "Adidas Yeezy Boost 350 V2",
+                price: 1500000,
+                originalPrice: 3000000,
+                condition: "Bekas (85% baru)",
+                description: "Warna masih fresh, bahan primeknit",
+                sizes: [39, 40, 42],
+                image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "premium"
+            },
+            {
+                id: 3,
+                name: "New Balance 550 White",
+                price: 850000,
+                originalPrice: 1800000,
+                condition: "Bekas (80% baru)",
+                description: "Import US, kulit asli",
+                sizes: [38, 39, 40],
+                image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
+                category: "import"
             }
+            // Tambahkan produk lain di sini
+        ];
+
+        // Render Produk
+        function renderProducts() {
+            const container = document.getElementById('products');
+            container.innerHTML = products.map(product => `
+                <div class="product-card">
+                    <img src="${product.image}" alt="${product.name}" class="product-image">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p><small>${product.condition}</small></p>
+                        <p>${product.description}</p>
+                        <p>Ukuran: ${product.sizes.join(', ')}</p>
+                        <p class="price-tag">Rp ${product.price.toLocaleString('id-ID')} 
+                            <small class="original-price">Rp ${product.originalPrice.toLocaleString('id-ID')}</small>
+                        </p>
+                        <button class="whatsapp-btn" onclick="orderViaWA(${product.id})">
+                            <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        // Fitur Wishlist
-        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        
-        function toggleWishlist(productId) {
-            const index = wishlist.indexOf(productId);
-            if(index === -1) {
-                wishlist.push(productId);
-            } else {
-                wishlist.splice(index, 1);
-            }
-            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        // Fitur Countdown
+        function startCountdown() {
+            let time = 3 * 60 * 60; // 3 jam
+            const timer = setInterval(() => {
+                const hours = Math.floor(time / 3600);
+                const minutes = Math.floor((time % 3600) / 60);
+                const seconds = time % 60;
+                document.getElementById('countdown').innerHTML = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                time--;
+                if (time < 0) clearInterval(timer);
+            }, 1000);
         }
 
-        // Sistem Review
-        function submitReview(productId) {
-            const review = prompt("Berikan penilaian Anda (1-5 bintang):");
-            if(review) {
-                alert("Terima kasih atas reviewnya!");
-            }
+        // Fitur WhatsApp
+        function orderViaWA(productId) {
+            const product = products.find(p => p.id === productId);
+            const message = `Halo, saya mau pesan:\n\n*${product.name}*\nHarga: Rp ${product.price.toLocaleString('id-ID')}\n\nApakah masih tersedia?`;
+            window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        // ... (Fungsi lainnya tetap sama) ...
+        // Jalankan saat halaman dimuat
+        window.onload = function() {
+            renderProducts();
+            startCountdown();
+        };
     </script>
 </body>
 </html>
