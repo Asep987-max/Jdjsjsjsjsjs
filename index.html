@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHOPIE KISMAN - Sepatu Bekas Premium</title>
+    <title>SHOPIE KISMAN - Toko Online Lengkap</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -38,6 +38,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
         .logo {
             font-size: 1.5rem;
@@ -47,6 +48,37 @@
             gap: 0.5rem;
             color: white;
             text-decoration: none;
+        }
+        .search-bar {
+            padding: 0.5rem;
+            border-radius: 20px;
+            border: none;
+            width: 300px;
+            margin: 0 1rem;
+        }
+        .category-buttons {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            background: white;
+            position: sticky;
+            top: 68px;
+            z-index: 99;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .category-btn {
+            background: var(--light);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            color: white;
         }
         .product-gallery {
             display: grid;
@@ -74,6 +106,15 @@
         }
         .product-info {
             padding: 1rem;
+        }
+        .product-category {
+            background: var(--secondary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
         }
         .price-tag {
             color: var(--primary);
@@ -111,11 +152,30 @@
             font-weight: bold;
             margin: 1rem 0;
         }
+        .load-more {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 2rem auto;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        .load-more:hover {
+            transform: scale(1.05);
+        }
         @media (max-width: 768px) {
             .product-gallery {
                 grid-template-columns: 1fr 1fr;
                 padding: 1rem;
                 gap: 1rem;
+            }
+            .search-bar {
+                width: 100%;
+                margin: 0.5rem 0;
             }
         }
         @media (max-width: 480px) {
@@ -133,8 +193,9 @@
     <header>
         <div class="nav-container">
             <a href="#" class="logo">
-                <i class="fas fa-shoe-prints"></i> SHOPIE KISMAN
+                <i class="fas fa-store"></i> SHOPIE KISMAN
             </a>
+            <input type="text" class="search-bar" placeholder="Cari produk..." id="searchInput">
             <div style="display: flex; gap: 1rem;">
                 <button onclick="toggleCart()" style="background: none; border: none; color: white; cursor: pointer;">
                     <i class="fas fa-shopping-cart"></i>
@@ -146,51 +207,27 @@
 
     <!-- Flash Sale Banner -->
     <div class="flash-sale">
-        ⚡ FLASH SALE! Diskon hingga 50% - Berakhir dalam: <span id="countdown">03:59:59</span>
+        ⚡ FLASH SALE! Diskon hingga 70% - Berakhir dalam: <span id="countdown">06:59:59</span>
+    </div>
+
+    <!-- Category Buttons -->
+    <div class="category-buttons">
+        <button class="category-btn active" onclick="filterProducts('all')">Semua</button>
+        <button class="category-btn" onclick="filterProducts('sepatu')">Sepatu</button>
+        <button class="category-btn" onclick="filterProducts('kolor')">Kolor/BH</button>
+        <button class="category-btn" onclick="filterProducts('sempak')">Sempak</button>
+        <button class="category-btn" onclick="filterProducts('elektronik')">Elektronik</button>
+        <button class="category-btn" onclick="filterProducts('aksesoris')">Aksesoris</button>
     </div>
 
     <!-- Product Gallery -->
-    <div class="product-gallery">
-        <!-- Produk 1 -->
-        <div class="product-card">
-            <img src="https://i.imgur.com/JrQZ8Yh.jpg" 
-                 alt="Sepatu Kisman Edisi Spesial" 
-                 class="product-image"
-                 onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Sepatu'">
-            <div class="product-info">
-                <h3>Sepatu Kisman Edisi Spesial</h3>
-                <p><small>Bekas (90% baru)</small></p>
-                <p>Original, box lengkap, sol masih tebal</p>
-                <p>Ukuran: 40, 41, 42</p>
-                <p class="price-tag">Rp 1.250.000 
-                    <small class="original-price">Rp 2.500.000</small>
-                </p>
-                <button class="whatsapp-btn" onclick="orderViaWA(1)">
-                    <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                </button>
-            </div>
-        </div>
-
-        <!-- Produk 2 -->
-        <div class="product-card">
-            <img src="https://i.imgur.com/KjL8t9D.jpg" 
-                 alt="Sepatu Kisman Premium" 
-                 class="product-image"
-                 onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Sepatu'">
-            <div class="product-info">
-                <h3>Sepatu Kisman Premium</h3>
-                <p><small>Bekas (85% baru)</small></p>
-                <p>Warna masih fresh, bahan primeknit</p>
-                <p>Ukuran: 39, 40, 42</p>
-                <p class="price-tag">Rp 950.000 
-                    <small class="original-price">Rp 1.800.000</small>
-                </p>
-                <button class="whatsapp-btn" onclick="orderViaWA(2)">
-                    <i class="fab fa-whatsapp"></i> Pesan Sekarang
-                </button>
-            </div>
-        </div>
+    <div class="product-gallery" id="productContainer">
+        <!-- Produk akan dimuat via JavaScript -->
     </div>
+
+    <button class="load-more" onclick="loadMoreProducts()">
+        <i class="fas fa-plus"></i> Muat Lebih Banyak
+    </button>
 
     <!-- WhatsApp Float Button -->
     <a href="https://wa.me/0107043927?text=Halo%20Shopie%20Kisman,%20saya%20mau%20tanya%20produk" 
@@ -201,9 +238,205 @@
     </a>
 
     <script>
-        // Fitur Countdown
+        // Database 1000 Produk (contoh 20 produk)
+        const allProducts = [
+            // Sepatu
+            {
+                id: 1,
+                name: "Sepatu Sneaker Premium",
+                price: 350000,
+                originalPrice: 700000,
+                condition: "Bekas (90% baru)",
+                description: "Original, sol tebal, nyaman dipakai",
+                sizes: [39, 40, 41, 42],
+                image: "https://i.imgur.com/7QZJx8a.jpg",
+                category: "sepatu",
+                stock: 10
+            },
+            {
+                id: 2,
+                name: "Sepatu Casual Kulit",
+                price: 450000,
+                originalPrice: 900000,
+                condition: "Bekas (85% baru)",
+                description: "Kulit asli, bahan premium",
+                sizes: [40, 41, 42],
+                image: "https://i.imgur.com/5tK8B9x.jpg",
+                category: "sepatu",
+                stock: 5
+            },
+            
+            // Kolor/BH
+            {
+                id: 3,
+                name: "Kolor Katun Premium",
+                price: 25000,
+                originalPrice: 50000,
+                condition: "Baru (tag masih ada)",
+                description: "Bahan katun lembut, berbagai warna",
+                sizes: ["L", "XL"],
+                image: "https://i.imgur.com/JrQZ8Yh.jpg",
+                category: "kolor",
+                stock: 50
+            },
+            {
+                id: 4,
+                name: "BH Sport Wanita",
+                price: 35000,
+                originalPrice: 70000,
+                condition: "Bekas (80% baru)",
+                description: "Nyaman untuk olahraga",
+                sizes: ["M", "L"],
+                image: "https://i.imgur.com/KjL8t9D.jpg",
+                category: "kolor",
+                stock: 30
+            },
+            
+            // Sempak
+            {
+                id: 5,
+                name: "Sempak Boxer Cotton",
+                price: 20000,
+                originalPrice: 40000,
+                condition: "Baru (packing plastik)",
+                description: "Bahan cotton combed premium",
+                sizes: ["M", "L", "XL"],
+                image: "https://i.imgur.com/3vJk7hT.jpg",
+                category: "sempak",
+                stock: 100
+            },
+            
+            // Elektronik
+            {
+                id: 6,
+                name: "Earphone Wireless",
+                price: 150000,
+                originalPrice: 300000,
+                condition: "Bekas (95% baru)",
+                description: "Baterai tahan lama, suara jernih",
+                image: "https://i.imgur.com/8mN9s0z.jpg",
+                category: "elektronik",
+                stock: 8
+            },
+            {
+                id: 7,
+                name: "Mouse Gaming RGB",
+                price: 120000,
+                originalPrice: 250000,
+                condition: "Bekas (90% baru)",
+                description: "DPI tinggi, 6 tombol programmable",
+                image: "https://i.imgur.com/v7Wk2pY.jpg",
+                category: "elektronik",
+                stock: 12
+            },
+            
+            // Tambahkan 13 produk lainnya sesuai kebutuhan
+            // ...
+            
+            // Contoh produk ke-20
+            {
+                id: 20,
+                name: "Tas Laptop 15.6 inch",
+                price: 80000,
+                originalPrice: 160000,
+                condition: "Bekas (85% baru)",
+                description: "Bahan waterproof, banyak kompartemen",
+                image: "https://i.imgur.com/qW3s9Ux.jpg",
+                category: "aksesoris",
+                stock: 7
+            }
+        ];
+
+        // Variabel global
+        let displayedProducts = 12;
+        let currentCategory = 'all';
+        let currentSearch = '';
+
+        // Fungsi untuk menampilkan produk
+        function displayProducts() {
+            const container = document.getElementById('productContainer');
+            container.innerHTML = '';
+            
+            const filteredProducts = allProducts.filter(product => {
+                const matchesCategory = currentCategory === 'all' || product.category === currentCategory;
+                const matchesSearch = product.name.toLowerCase().includes(currentSearch.toLowerCase()) || 
+                                     product.description.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+            
+            for (let i = 0; i < displayedProducts && i < filteredProducts.length; i++) {
+                const product = filteredProducts[i];
+                container.innerHTML += `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-image"
+                             onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Produk'">
+                        <div class="product-info">
+                            <span class="product-category">${product.category.toUpperCase()}</span>
+                            <h3>${product.name}</h3>
+                            <p><small>${product.condition}</small></p>
+                            <p>${product.description}</p>
+                            ${product.sizes ? `<p>Ukuran: ${Array.isArray(product.sizes) ? product.sizes.join(', ') : product.sizes}</p>` : ''}
+                            <p class="price-tag">Rp ${product.price.toLocaleString('id-ID')} 
+                                <small class="original-price">Rp ${product.originalPrice.toLocaleString('id-ID')}</small>
+                            </p>
+                            <p><small>Stok: ${product.stock}</small></p>
+                            <button class="whatsapp-btn" onclick="orderViaWA(${product.id})">
+                                <i class="fab fa-whatsapp"></i> Pesan Sekarang
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Sembunyikan tombol load more jika tidak ada produk lagi
+            document.querySelector('.load-more').style.display = 
+                displayedProducts >= filteredProducts.length ? 'none' : 'block';
+        }
+
+        // Fungsi filter kategori
+        function filterProducts(category) {
+            currentCategory = category;
+            displayedProducts = 12;
+            
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === category || 
+                    (category === 'all' && btn.textContent.toLowerCase() === 'semua'));
+            });
+            
+            displayProducts();
+        }
+
+        // Fungsi pencarian
+        document.getElementById('searchInput').addEventListener('input', function() {
+            currentSearch = this.value;
+            displayedProducts = 12;
+            displayProducts();
+        });
+
+        // Fungsi untuk memuat lebih banyak produk
+        function loadMoreProducts() {
+            displayedProducts += 12;
+            displayProducts();
+        }
+
+        // Fitur WhatsApp
+        function orderViaWA(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            const message = `Halo SHOPIE KISMAN, saya mau pesan:
+            
+*${product.name}*
+Harga: Rp ${product.price.toLocaleString('id-ID')}
+Kondisi: ${product.condition}
+${product.sizes ? `Ukuran: ${Array.isArray(product.sizes) ? product.sizes.join(', ') : product.sizes}` : ''}
+
+Apakah masih tersedia?`;
+            window.open(`https://wa.me/0107043927?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // Countdown timer
         function startCountdown() {
-            let time = 3 * 60 * 60; // 3 jam
+            let time = 6 * 60 * 60 + 59 * 60 + 59; // 6 jam 59 menit 59 detik
             const timer = setInterval(() => {
                 const hours = Math.floor(time / 3600);
                 const minutes = Math.floor((time % 3600) / 60);
@@ -215,22 +448,11 @@
             }, 1000);
         }
 
-        // Fitur WhatsApp
-        function orderViaWA(productId) {
-            let productName, price;
-            if (productId === 1) {
-                productName = "Sepatu Kisman Edisi Spesial";
-                price = "1.250.000";
-            } else {
-                productName = "Sepatu Kisman Premium";
-                price = "950.000";
-            }
-            const message = `Halo, saya mau pesan:\n\n*${productName}*\nHarga: Rp ${price}\n\nApakah masih tersedia?`;
-            window.open(`https://wa.me/0107043927?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
         // Jalankan saat halaman dimuat
-        window.onload = startCountdown;
+        window.onload = function() {
+            displayProducts();
+            startCountdown();
+        };
     </script>
 </body>
 </html>
