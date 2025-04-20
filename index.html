@@ -1,253 +1,210 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shopie Premium</title>
-  <style>
-    :root {
-      --primary-color: #667eea;
-      --secondary-color: #764ba2;
-      --glass-bg: rgba(255, 255, 255, 0.2);
-      --glass-blur: blur(12px);
-      --text-light: #ffffff;
-      --text-dark: #2e2e2e;
-      --font-sans: 'Poppins', sans-serif;
-      --font-serif: 'Playfair Display', serif;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: var(--font-sans);
-      background: #f0f2f5;
-      color: var(--text-dark);
-      scroll-behavior: smooth;
-      transition: background 0.3s ease;
-    }
-    .navbar {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      color: white;
-      font-family: var(--font-serif);
-    }
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      height: 300px;
-    }
-    .slides {
-      display: flex;
-      width: 300%;
-      animation: slide 15s infinite;
-    }
-    .carousel img {
-      width: 100vw;
-      height: 300px;
-      object-fit: cover;
-    }
-    @keyframes slide {
-      0% { transform: translateX(0); }
-      33% { transform: translateX(-100vw); }
-      66% { transform: translateX(-200vw); }
-      100% { transform: translateX(0); }
-    }
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-    }
-    .product-card {
-      background: var(--glass-bg);
-      backdrop-filter: var(--glass-blur);
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-    }
-    .product-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-    }
-    .badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: red;
-      color: white;
-      padding: 0.2rem 0.5rem;
-      font-size: 0.75rem;
-      border-radius: 8px;
-    }
-    button {
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 1rem;
-    }
-    button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #333;
-      color: white;
-      padding: 1rem;
-      border-radius: 8px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
-      z-index: 1000;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .dark-mode {
-      background: #1e1e1e;
-      color: #e0e0e0;
-    }
-    .toggle-dark {
-      margin-left: auto;
-    }
-    .checkout-form, .cart-section, .product-detail {
-      padding: 2rem;
-    }
-    .form-group {
-      margin-bottom: 1rem;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .form-group input, .form-group select {
-      padding: 0.5rem;
-      width: 100%;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      background: #fff;
-      margin-bottom: 1rem;
-      border-radius: 8px;
-    }
-    .testimonial {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      margin: 2rem;
-    }
-    .testimonial img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Shopie Premium - Toko Online Elektronik dan Gadget Premium">
+    <meta name="keywords" content="toko online, gadget, elektronik, premium, shopie">
+    <meta name="author" content="Shopie Team">
+    <title>Shopie Premium</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --bg-light: #f0f2f5;
+            --bg-dark: #1e1e1e;
+            --text-light: #ffffff;
+            --text-dark: #2e2e2e;
+            --font-sans: 'Poppins', sans-serif;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: var(--font-sans); background: var(--bg-light); color: var(--text-dark); transition: background .3s, color .3s; }
+        .dark-mode { background: var(--bg-dark); color: var(--text-light); }
+        header { background: linear-gradient(135deg,var(--primary-color),var(--secondary-color)); padding:1rem; display:flex; align-items:center; justify-content:space-between; }
+        header h1 { color:#fff; }
+        .controls { display:flex; gap:1rem; }
+        .controls input, .controls select { padding:.5rem; border-radius:6px; border:1px solid #ccc; }
+        .controls button { padding:.5rem 1rem; border:none; background:#fff; color:var(--primary-color); border-radius:6px; cursor:pointer; transition:background .3s; }
+        .controls button:hover { background: var(--secondary-color); color:#fff; }
+        nav .cart-badge { position:relative; }
+        nav .cart-badge span { position:absolute; top:-8px; right:-8px; background:red; color:#fff; border-radius:50%; padding:2px 6px; font-size:.75rem; }
+        #productList { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; padding:1rem; }
+        .card { background:var(--bg-light); padding:1rem; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform .3s; }
+        .card:hover { transform:scale(1.03); }
+        .card img { width:100%; border-radius:8px; }
+        .card h3 { margin:.5rem 0; }
+        .card p { margin:.25rem 0; }
+        .card .rating { color:gold; }
+        .card button { margin-top:.5rem; width:100%; }
+        #cart-section, #checkout-section { padding:1rem; margin:1rem; border:1px solid #ccc; border-radius:8px; background:#fff; }
+        #cart-items li { list-style:none; margin-bottom:.5rem; display:flex; justify-content:space-between; align-items:center; }
+        #cart-items button { margin-left:.5rem; padding:2px 6px; }
+        /** Responsive **/
+        @media (max-width:600px) { .controls { flex-direction:column; } }
+    </style>
 </head>
 <body>
-  <nav class="navbar">
-    <div>Shopie</div>
-    <div>
-      <a href="#">Beranda</a>
-      <a href="#produk-detail">Produk</a>
-      <a href="#keranjang">Keranjang</a>
-      <a href="#checkout">Checkout</a>
-    </div>
-    <button class="toggle-dark" onclick="toggleDarkMode()">🌓</button>
-  </nav>  <div class="carousel">
-    <div class="slides">
-      <img src="https://via.placeholder.com/800x300?text=Slide+1" alt="Slide 1" />
-      <img src="https://via.placeholder.com/800x300?text=Slide+2" alt="Slide 2" />
-      <img src="https://via.placeholder.com/800x300?text=Slide+3" alt="Slide 3" />
-    </div>
-  </div>  <section class="product-grid">
-    <div class="product-card">
-      <div class="badge">Diskon</div>
-      <img src="https://images.unsplash.com/photo-1585386959984-a4155228e5f9?w=400" alt="Headphone" style="width:100%; border-radius:8px;" />
-      <h3>Headphone Bluetooth</h3>
-      <p>Rp 250.000</p>
-      <button onclick="addToCart(this)">Tambah ke Keranjang</button>
-    </div>
-    <div class="product-card">
-      <div class="badge">Terlaris</div>
-      <img src="https://images.unsplash.com/photo-1592990844825-7e4cc3a06dbf?w=400" alt="Smartwatch" style="width:100%; border-radius:8px;" />
-      <h3>Smartwatch Series 7</h3>
-      <p>Rp 850.000</p>
-      <button onclick="addToCart(this)">Tambah ke Keranjang</button>
-    </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1612817158784-6e7768cfb0f4?w=400" alt="Kamera Mirrorless" style="width:100%; border-radius:8px;" />
-      <h3>Kamera Mirrorless</h3>
-      <p>Rp 5.250.000</p>
-      <button onclick="addToCart(this)">Tambah ke Keranjang</button>
-    </div>
-    <div class="product-card">
-      <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400" alt="Laptop Gaming" style="width:100%; border-radius:8px;" />
-      <h3>Laptop Gaming 15"</h3>
-      <p>Rp 13.000.000</p>
-      <button onclick="addToCart(this)">Tambah ke Keranjang</button>
-    </div>
-  </section>  <section id="produk-detail" class="product-detail">
-    <h2>Detail Produk</h2>
-    <img src="https://via.placeholder.com/400x300" alt="Gambar Utama" />
-    <p>Pilihan Warna: <select><option>Hitam</option><option>Putih</option></select></p>
-    <p>Ukuran: <select><option>M</option><option>L</option><option>XL</option></select></p>
-    <p><strong>Deskripsi:</strong> Produk ini terbuat dari bahan premium dengan kualitas terbaik.</p>
-  </section>  <section id="keranjang" class="cart-section">
-    <h2>Keranjang Anda</h2>
-    <div class="cart-item">
-      <span>Produk Premium (x1)</span>
-      <span>Rp 250.000</span>
-    </div>
-    <p><strong>Total:</strong> Rp 250.000</p>
-  </section>  <section id="checkout" class="checkout-form">
-    <h2>Checkout</h2>
-    <div class="form-group">
-      <label>Nama Lengkap</label>
-      <input type="text" />
-    </div>
-    <div class="form-group">
-      <label>Alamat Pengiriman</label>
-      <input type="text" />
-    </div>
-    <div class="form-group">
-      <label>Metode Pembayaran</label>
-      <select><option>COD</option><option>Transfer Bank</option></select>
-    </div>
-    <button onclick="checkoutSuccess()">Bayar</button>
-  </section>  <section class="testimonial">
-    <img src="https://via.placeholder.com/60" alt="User" />
-    <p><strong>Andi</strong></p>
-    <p>"Produk berkualitas tinggi, pengiriman cepat!"</p>
-    <p>⭐⭐⭐⭐⭐</p>
-  </section>  <div id="toast" class="toast">Item berhasil ditambahkan!</div>  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
+    <header>
+        <h1>Shopie Premium</h1>
+        <div class="controls">
+            <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterProducts()">
+            <select id="filterCategory" onchange="filterProducts()">
+                <option value="">Semua Kategori</option>
+                <option value="smartphone">Smartphone</option>
+                <option value="laptop">Laptop</option>
+                <option value="aksesoris">Aksesoris</option>
+            </select>
+            <select id="filterRating" onchange="filterProducts()">
+                <option value="0">Semua Rating</option>
+                <option value="4">4+ Bintang</option>
+                <option value="3">3+ Bintang</option>
+            </select>
+            <select id="filterPrice" onchange="filterProducts()">
+                <option value="">Semua Harga</option>
+                <option value="asc">Termurah</option>
+                <option value="desc">Termahal</option>
+            </select>
+            <div class="cart-badge"><button onclick="toggleCart()">Keranjang</button><span id="cartCount">0</span></div>
+            <button onclick="toggleDarkMode()">Mode Gelap/Terang</button>
+        </div>
+    </header>
 
-    function addToCart(btn) {
-      const toast = document.getElementById("toast");
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3000);
-    }
+    <main>
+        <section id="productList"></section>
+        <section id="cart-section">
+            <h2>Keranjang Belanja</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: <span id="cartTotal">Rp0</span></p>
+        </section>
+        <section id="checkout-section">
+            <h2>Checkout</h2>
+            <form id="checkoutForm" onsubmit="handleCheckout(event)">
+                <input type="text" id="name" placeholder="Nama Lengkap" required><br>
+                <input type="email" id="email" placeholder="Email" required><br>
+                <input type="text" id="address" placeholder="Alamat Lengkap" required><br>
+                <button type="submit">Bayar Sekarang</button>
+            </form>
+        </section>
+    </main>
 
-    function checkoutSuccess() {
-      alert("Terima kasih! Pesanan Anda berhasil.");
-    }
-  </script></body>
-</html>
+    <footer style="text-align:center; padding:1rem; background:#222; color:#fff;">
+        &copy; 2025 Shopie Premium
+    </footer>
+
+    <script>
+        // Data Produk
+        const products = [
+            {
+                id: 1,
+                name: 'Pacar Sewaan',
+                price: 1000000,
+                category: 'smartphone',
+                rating: 8,
+                quality: '10 Bintang',
+                image: 'https://i.ibb.co/rR4GXk8H/pacar-sewaan1.jpg'
+            },
+            {
+                id: 2,
+                name: 'Pacar Sewaan',
+                price: 900000,
+                category: 'smartphone',
+                rating: 6,
+                quality: '7 Bintang',
+                image: 'https://i.ibb.co/C574d3qK/pacar-sewaan2.jpg'
+            },
+            {
+                id: 3,
+                name: 'Pacar Sewaan',
+                price: 1100000,
+                category: 'smartphone',
+                rating: 10,
+                quality: '10 Bintang',
+                image: 'https://i.ibb.co/rRkmGcbY/pacar-sewaan3.jpg'
+            },
+            {
+                id: 4,
+                name: 'Pacar Sewaan',
+                price: 800000,
+                category: 'smartphone',
+                rating: 2,
+                quality: '3 Bintang',
+                image: 'https://i.ibb.co/TqbDCNwj/pacar-sewaan4.jpg'
+            }
+        ];
+
+        // Render Produk
+        function renderProducts(list) {
+            const container = document.getElementById('productList');
+            container.innerHTML = '';
+            list.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/220x150?text=Gambar+Tidak+Ditemukan'">
+                    <h3>${p.name}</h3>
+                    <p>Rp${p.price.toLocaleString()}</p>
+                    <p>Rating: ${p.rating}/10</p>
+                    <p>Kualitas: ${p.quality}</p>
+                    <button onclick='addToCart(${JSON.stringify(p)})'>Tambah ke Keranjang</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Tambah ke Keranjang
+        let cart = JSON.parse(localStorage.getItem('cart')) || {};
+        function addToCart(p) {
+            cart[p.id] = cart[p.id] ? { ...cart[p.id], quantity: cart[p.id].quantity + 1 } : { ...p, quantity: 1 };
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartDisplay();
+        }
+
+        // Update Tampilan Keranjang
+        function updateCartDisplay() {
+            const itemsEl = document.getElementById('cart-items');
+            const totalEl = document.getElementById('cartTotal');
+            const countEl = document.getElementById('cartCount');
+            itemsEl.innerHTML = '';
+            let total = 0, count = 0;
+            Object.values(cart).forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} x${item.quantity} - Rp${(item.price * item.quantity).toLocaleString()}`;
+                itemsEl.appendChild(li);
+                total += item.price * item.quantity;
+                count += item.quantity;
+            });
+            totalEl.textContent = `Rp${total.toLocaleString()}`;
+            countEl.textContent = count;
+        }
+
+        // Filter Produk
+        function filterProducts() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
+            renderProducts(filtered);
+        }
+
+        // Checkout
+        function handleCheckout(e) {
+            e.preventDefault();
+            alert('Checkout berhasil! Total: ' + document.getElementById('cartTotal').textContent);
+            cart = {}; localStorage.setItem('cart', JSON.stringify(cart)); updateCartDisplay();
+        }
+
+        // Dark/Light Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode'));
+        }
+
+        // Init
+        window.onload = () => {
+            renderProducts(products);
+            updateCartDisplay();
+            if (localStorage.getItem('theme') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+        };
+    </script>
+</
