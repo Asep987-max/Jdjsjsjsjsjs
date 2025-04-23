@@ -3,208 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Shopie Premium - Toko Online Elektronik dan Gadget Premium">
-    <meta name="keywords" content="toko online, gadget, elektronik, premium, shopie">
-    <meta name="author" content="Shopie Team">
-    <title>Shopie Premium</title>
-    <link rel="manifest" href="manifest.json">
-    <style>
-        :root {
-            --primary-color: #667eea;
-            --secondary-color: #764ba2;
-            --bg-light: #f0f2f5;
-            --bg-dark: #1e1e1e;
-            --text-light: #ffffff;
-            --text-dark: #2e2e2e;
-            --font-sans: 'Poppins', sans-serif;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: var(--font-sans); background: var(--bg-light); color: var(--text-dark); transition: background .3s, color .3s; }
-        .dark-mode { background: var(--bg-dark); color: var(--text-light); }
-        header { background: linear-gradient(135deg,var(--primary-color),var(--secondary-color)); padding:1rem; display:flex; align-items:center; justify-content:space-between; }
-        header h1 { color:#fff; }
-        .controls { display:flex; gap:1rem; }
-        .controls input, .controls select { padding:.5rem; border-radius:6px; border:1px solid #ccc; }
-        .controls button { padding:.5rem 1rem; border:none; background:#fff; color:var(--primary-color); border-radius:6px; cursor:pointer; transition:background .3s; }
-        .controls button:hover { background: var(--secondary-color); color:#fff; }
-        nav .cart-badge { position:relative; }
-        nav .cart-badge span { position:absolute; top:-8px; right:-8px; background:red; color:#fff; border-radius:50%; padding:2px 6px; font-size:.75rem; }
-        #productList { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; padding:1rem; }
-        .card { background:var(--bg-light); padding:1rem; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform .3s; }
-        .card:hover { transform:scale(1.03); }
-        .card img { width:100%; border-radius:8px; }
-        .card h3 { margin:.5rem 0; }
-        .card p { margin:.25rem 0; }
-        .card .rating { color:gold; }
-        .card button { margin-top:.5rem; width:100%; }
-        #cart-section, #checkout-section { padding:1rem; margin:1rem; border:1px solid #ccc; border-radius:8px; background:#fff; }
-        #cart-items li { list-style:none; margin-bottom:.5rem; display:flex; justify-content:space-between; align-items:center; }
-        #cart-items button { margin-left:.5rem; padding:2px 6px; }
-        /** Responsive **/
-        @media (max-width:600px) { .controls { flex-direction:column; } }
-    </style>
+    <title>Portofolio [Nama Anda] | Web Developer & Designer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <div class="fab">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Cursor Effect -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
     <header>
-        <h1>Shopie Premium</h1>
-        <div class="controls">
-            <input type="text" id="searchInput" placeholder="Cari produk..." oninput="filterProducts()">
-            <select id="filterCategory" onchange="filterProducts()">
-                <option value="">Semua Kategori</option>
-                <option value="smartphone">Smartphone</option>
-                <option value="laptop">Laptop</option>
-                <option value="aksesoris">Aksesoris</option>
-            </select>
-            <select id="filterRating" onchange="filterProducts()">
-                <option value="0">Semua Rating</option>
-                <option value="4">4+ Bintang</option>
-                <option value="3">3+ Bintang</option>
-            </select>
-            <select id="filterPrice" onchange="filterProducts()">
-                <option value="">Semua Harga</option>
-                <option value="asc">Termurah</option>
-                <option value="desc">Termahal</option>
-            </select>
-            <div class="cart-badge"><button onclick="toggleCart()">Keranjang</button><span id="cartCount">0</span></div>
-            <button onclick="toggleDarkMode()">Mode Gelap/Terang</button>
-        </div>
+        <nav>
+            <div class="logo" data-text="[Nama]">[Nama]</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link hover-underline">Home</a></li>
+                <li><a href="#about" class="nav-link hover-underline">Tentang</a></li>
+                <li><a href="#portfolio" class="nav-link hover-underline">Portofolio</a></li>
+                <li><a href="#services" class="nav-link hover-underline">Layanan</a></li>
+                <li><a href="#contact" class="nav-link hover-underline">Kontak</a></li>
+            </ul>
+            <div class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
     </header>
 
-    <main>
-        <section id="productList"></section>
-        <section id="cart-section">
-            <h2>Keranjang Belanja</h2>
-            <ul id="cart-items"></ul>
-            <p>Total: <span id="cartTotal">Rp0</span></p>
-        </section>
-        <section id="checkout-section">
-            <h2>Checkout</h2>
-            <form id="checkoutForm" onsubmit="handleCheckout(event)">
-                <input type="text" id="name" placeholder="Nama Lengkap" required><br>
-                <input type="email" id="email" placeholder="Email" required><br>
-                <input type="text" id="address" placeholder="Alamat Lengkap" required><br>
-                <button type="submit">Bayar Sekarang</button>
-            </form>
-        </section>
-    </main>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="social-float">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-dribbble"></i></a>
+            </div>
+            <h1 class="animated-headline">
+                <span class="animated-text">Hai, Saya</span>
+                <span class="animated-name">[Nama Anda]</span>
+            </h1>
+            <p class="tagline typewriter">Web Developer & UI/UX Designer</p>
+            <div class="hero-buttons">
+                <a href="#portfolio" class="cta-button pulse">Lihat Portofolio</a>
+                <a href="#contact" class="cta-button secondary">Hubungi Saya</a>
+            </div>
+            <div class="scroll-down">
+                <span>Scroll Down</span>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-container tilt">
+                <img src="images/profil.png" alt="[Nama Anda]" width="400" height="500">
+                <div class="tech-icons">
+                    <div class="icon react"><i class="fab fa-react"></i></div>
+                    <div class="icon js"><i class="fab fa-js"></i></div>
+                    <div class="icon html"><i class="fab fa-html5"></i></div>
+                    <div class="icon css"><i class="fab fa-css3-alt"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer style="text-align:center; padding:1rem; background:#222; color:#fff;">
-        &copy; 2025 Shopie Premium
-    </footer>
+    <section id="about" class="about">
+        <div class="section-header">
+            <h2><span>Tentang</span> Saya</h2>
+            <div class="section-subheader">Kenali saya lebih dalam</div>
+        </div>
+        <div class="about-container">
+            <div class="about-image">
+                <div class="image-frame">
+                    <img src="images/about.jpg" alt="Tentang Saya" width="500" height="600">
+                    <div class="frame-decoration"></div>
+                </div>
+            </div>
+            <div class="about-content">
+                <p>Saya seorang profesional dengan pengalaman 5+ tahun di bidang pengembangan web dan desain antarmuka. Spesialisasi saya mencakup pembuatan aplikasi web modern dengan fokus pada kinerja dan pengalaman pengguna.</p>
+                
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>UI/UX Design</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress design"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Web Development</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress development"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Mobile Development</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress mobile"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab-header">
+                        <div class="tab-btn active" data-tab="education">Pendidikan</div>
+                        <div class="tab-btn" data-tab="experience">Pengalaman</div>
+                        <div class="tab-btn" data-tab="certification">Sertifikasi</div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="education">
+                            <ul class="timeline">
+                                <li>
+                                    <h4>Universitas Contoh</h4>
+                                    <span>2015 - 2019</span>
+                                    <p>Sarjana Teknik Informatika</p>
+                                </li>
+                                <li>
+                                    <h4>SMA Contoh</h4>
+                                    <span>2012 - 2015</span>
+                                    <p>Jurusan IPA</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="experience">
+                            <ul class="timeline">
+                                <li>
+                                    <h4>Perusahaan A</h4>
+                                    <span>2021 - Sekarang</span>
+                                    <p>Frontend Developer</p>
+                                </li>
+                                <li>
+                                    <h4>Perusahaan B</h4>
+                                    <span>2019 - 2021</span>
+                                    <p>Web Designer</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="certification">
+                            <ul class="timeline">
+                                <li>
+                                    <h4>Google UX Design</h4>
+                                    <span>2022</span>
+                                    <p>Coursera</p>
+                                </li>
+                                <li>
+                                    <h4>Frontend Developer</h4>
+                                    <span>2021</span>
+                                    <p>Dicoding</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <script>
-        // Data Produk
-        const products = [
-            {
-                id: 1,
-                name: 'Pacar Sewaan',
-                price: 1000000,
-                category: 'smartphone',
-                rating: 8,
-                quality: '10 Bintang',
-                image: 'https://i.ibb.co/rR4GXk8H/pacar-sewaan1.jpg'
-            },
-            {
-                id: 2,
-                name: 'Pacar Sewaan',
-                price: 900000,
-                category: 'smartphone',
-                rating: 6,
-                quality: '7 Bintang',
-                image: 'https://i.ibb.co/C574d3qK/pacar-sewaan2.jpg'
-            },
-            {
-                id: 3,
-                name: 'Pacar Sewaan',
-                price: 1100000,
-                category: 'smartphone',
-                rating: 10,
-                quality: '10 Bintang',
-                image: 'https://i.ibb.co/rRkmGcbY/pacar-sewaan3.jpg'
-            },
-            {
-                id: 4,
-                name: 'Pacar Sewaan',
-                price: 800000,
-                category: 'smartphone',
-                rating: 2,
-                quality: '3 Bintang',
-                image: 'https://i.ibb.co/TqbDCNwj/pacar-sewaan4.jpg'
-            }
-        ];
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2><span>Layanan</span> Saya</h2>
+            <div class="section-subheader">Apa yang saya tawarkan</div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>UI/UX Design</h3>
+                <p>Desain antarmuka yang indah dan pengalaman pengguna yang optimal untuk produk digital Anda.</p>
+                <div class="service-cta">
+                    <a href="#" class="service-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-decoration"></div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3>Web Development</h3>
+                <p>Pengembangan website responsif dan aplikasi web dengan teknologi terkini.</p>
+                <div class="service-cta">
+                    <a href="#" class="service-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-decoration"></div>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Mobile Development</h3>
+                <p>Aplikasi mobile hybrid atau native untuk platform iOS dan Android.</p>
+                <div class="service-cta">
+                    <a href="#" class="service-link">Pelajari Lebih Lanjut <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-decoration"></div>
+            </div>
+        </div>
+    </section>
 
-        // Render Produk
-        function renderProducts(list) {
-            const container = document.getElementById('productList');
-            container.innerHTML = '';
-            list.forEach(p => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.innerHTML = `
-                    <img src="${p.image}" alt="${p.name}" onerror="this.src='https://via.placeholder.com/220x150?text=Gambar+Tidak+Ditemukan'">
-                    <h3>${p.name}</h3>
-                    <p>Rp${p.price.toLocaleString()}</p>
-                    <p>Rating: ${p.rating}/10</p>
-                    <p>Kualitas: ${p.quality}</p>
-                    <button onclick='addToCart(${JSON.stringify(p)})'>Tambah ke Keranjang</button>
-                `;
-                container.appendChild(card);
-            });
-        }
+    <section id="portfolio" class="portfolio">
+        <div class="section-header">
+            <h2><span>Portofolio</span> Saya</h2>
+            <div class="section-subheader">Karya terbaru saya</div>
+        </div>
+        <div class="portfolio-filter">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">Aplikasi</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" data-category="web">
+                <div class="portfolio-img">
+                    <img src="images/project1.jpg" alt="Proyek 1" width="600" height="400">
+                    <div class="portfolio-overlay">
+                        <div class="overlay-content">
+                            <h3>Aplikasi E-Commerce</h3>
+                            <p>Platform belanja online dengan sistem pembayaran terintegrasi</p>
+                            <a href="#" class="portfolio-view">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="app">
+                <div class="portfolio-img">
+                    <img src="images/project2.jpg" alt="Proyek 2" width="600" height="400">
+                    <div class="portfolio-overlay">
+                        <div class="overlay-content">
+                            <h3>Aplikasi Mobile</h3>
+                            <p>Aplikasi fitness tracker untuk iOS dan Android</p>
+                            <a href="#" class="portfolio-view">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="design">
+                <div class="portfolio-img">
+                    <img src="images/project3.jpg" alt="Proyek 3" width="600" height="400">
+                    <div class="portfolio-overlay">
+                        <div class="overlay-content">
+                            <h3>Redesign Website</h3>
+                            <p>UI/UX redesign untuk platform SaaS</p>
+                            <a href="#" class="portfolio-view">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-item" data-category="web">
+                <div class="portfolio-img">
+                    <img src="images/project4.jpg" alt="Proyek 4" width="600" height="400">
+                    <div class="portfolio-overlay">
+                        <div class="overlay-content">
+                            <h3>Dashboard Admin</h3>
+                            <p>Sistem manajemen konten dengan analitik real-time</p>
+                            <a href="#" class="portfolio-view">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portfolio-cta">
+            <a href="#" class="cta-button">Lihat Lebih Banyak</a>
+        </div>
+    </section>
 
-        // Tambah ke Keranjang
-        let cart = JSON.parse(localStorage.getItem('cart')) || {};
-        function addToCart(p) {
-            cart[p.id] = cart[p.id] ? { ...cart[p.id], quantity: cart[p.id].quantity + 1 } : { ...p, quantity: 1 };
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartDisplay();
-        }
+    <section class="testimonials">
+        <div class="section-header">
+            <h2><span>Testimoni</span> Klien</h2>
+            <div class="section-subheader">Apa kata mereka tentang saya</div>
+        </div>
+        <div class="swiper testimonial-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Bekerja dengan [Nama] adalah pengalaman yang luar biasa. Dia memberikan solusi kreatif untuk masalah kompleks dan selalu tepat waktu."</p>
+                        <div class="testimonial-author">
+                            <img src="images/client1.jpg" alt="Client 1" width="60" height="60">
+                            <div class="author-info">
+                                <h4>John Doe</h4>
+                                <span>CEO Perusahaan XYZ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonial-text">"Desain yang dibuat [Nama] sangat meningkatkan konversi website kami. Sangat profesional dan mengerti kebutuhan bisnis."</p>
+                        <div class="testimonial-author">
+                            <img src="images/client2.jpg" alt="Client 2" width="60" height="60">
+                            <div class="author-info">
+                                <h4>Jane Smith</h4>
+                                <span>Marketing Director ABC Corp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="testimonial-card">
+                        <div class="testimonial-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonial-text">"Aplikasi yang dikembangkan [Nama] sangat stabil dan user-friendly. Tim development yang sangat kompeten."</p>
+                        <div class="testimonial-author">
+                            <img src="images/client3.jpg" alt="Client 3" width="60" height="60">
+                            <div class="author-info">
+                                <h4>Robert Johnson</h4>
+                                <span>CTO Startup DEF</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
 
-        // Update Tampilan Keranjang
-        function updateCartDisplay() {
-            const itemsEl = document.getElementById('cart-items');
-            const totalEl = document.getElementById('cartTotal');
-            const countEl = document.getElementById('cartCount');
-            itemsEl.innerHTML = '';
-            let total = 0, count = 0;
-            Object.values(cart).forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `${item.name} x${item.quantity} - Rp${(item.price * item.quantity).toLocaleString()}`;
-                itemsEl.appendChild(li);
-                total += item.price * item.quantity;
-                count += item.quantity;
-            });
-            totalEl.textContent = `Rp${total.toLocaleString()}`;
-            countEl.textContent = count;
-        }
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <h2><span>Hubungi</span> Saya</h2>
+            <div class="section-subheader">Mari bekerja sama</div>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <a href="mailto:email@contoh.com">email@contoh.com</a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Telepon</h4>
+                        <a href="tel:+628123456789">+62 812 3456 789</a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h4>Lokasi</h4>
+                        <span>Jakarta, Indonesia</span>
+                    </div>
+                </div>
+                <div class="contact-social">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-dribbble"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" placeholder="Nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="subject" placeholder="Subjek">
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" placeholder="Pesan Anda" required></textarea>
+                    </div>
+                    <button type="submit" class="cta-button submit-btn">
+                        <span>Kirim Pesan</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="form-decoration"></div>
+            </div>
+        </div>
+    </section>
 
-        // Filter Produk
-        function filterProducts() {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => p.name.toLowerCase().includes(term));
-            renderProducts(filtered);
-        }
-
-        // Checkout
-        function handleCheckout(e) {
-            e.preventDefault();
-            alert('Checkout berhasil! Total: ' + document.getElementById('cartTotal').textContent);
-            cart = {}; localStorage.setItem('cart', JSON.stringify(cart)); updateCartDisplay();
-        }
-
-        // Dark/Light Mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('dark-mode');
-            localStorage.setItem('theme', document.body.classList.contains('dark-mode'));
-        }
-
-        // Init
-        window.onload = () => {
-            renderProducts(products);
-            updateCartDisplay();
-            if (localStorage.getItem('theme') === 'true') {
-                document.body.classList.add('dark-mode');
-            }
-        };
-    </script>
-</
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">[Nama]</div>
+                <p>Web Developer & UI/UX Designer</p>
+            </div>
+            <div class="footer-links">
+                <h4>Tautan Cepat</h4>
+                <u
